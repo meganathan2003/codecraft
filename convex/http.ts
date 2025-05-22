@@ -87,6 +87,7 @@ http.route({
       // save the user to convex db
       const { id, email_addresses, first_name, last_name } = evt.data;
 
+
       const email = email_addresses[0].email_address;
       const name = `${first_name || ""} ${last_name || ""}`.trim();
 
@@ -96,8 +97,9 @@ http.route({
           email,
           name,
         });
-      } catch (error) {
-        console.log("Error creating user:", error);
+        console.log("User synced successfully");
+      } catch (error: any) {
+        console.log("Error creating user:", error.message);
         return new Response("Error creating user", { status: 500 });
       }
     }
